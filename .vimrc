@@ -1,0 +1,15 @@
+set ttyfast
+set cursorline
+set cursorcolumn
+syntax on
+colorscheme molokai
+set title
+set number
+set ambiwidth=double
+set tabstop=4
+set noexpandtab
+set shiftwidth=4
+set softtabstop=0
+set smartindent
+set cursorline
+set cursorcolumn
