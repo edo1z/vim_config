@@ -30,7 +30,6 @@ if dein#check_install()
 	call dein#install()
 endif
 
-
 """""""""""""""""""
 " Color Scheme
 """""""""""""""""""
@@ -38,7 +37,6 @@ set background=dark
 colorscheme Antares
 colorscheme molokai
 colorscheme badwolf
-"""""""""""""""""""
 
 """""""""""""""""""
 " Basic Setting
@@ -55,6 +53,7 @@ set softtabstop=0
 set smartindent
 set ttyfast
 set noswapfile
+set laststatus=2
 " ウインドウのタイトルバーにファイルのパス情報等を表示する
 set title
 " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
@@ -116,7 +115,6 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vspli
 " ESCキーを2回押すと終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " lightlineの設定
@@ -133,8 +131,6 @@ let g:lightline = {
       \ }
 
 set noshowmode
-
-
 
 """"""""""""""""""""""""""""""
 " 画面分割・タブページの設定
@@ -187,7 +183,6 @@ filetype plugin indent on
 nnoremap [go] <Nop>
 nmap     <Space>g [go]
 nnoremap [go]r :GoRun<CR>
-
 
 
 
