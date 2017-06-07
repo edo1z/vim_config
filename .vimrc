@@ -187,6 +187,7 @@ filetype plugin indent on
 nnoremap [go] <Nop>
 nmap     <Space>g [go]
 nnoremap [go]r :GoRun<CR>
+nnoremap [go]e :GoErrCheck<CR>
 
 
 
