@@ -10,7 +10,6 @@ call dein#begin(expand('~/.vim/dein'))
 """""""""""""""""""
 call dein#add('tomasr/molokai')
 call dein#add('sjl/badwolf')
-call dein#add('Haron-Prime/Antares')
 """""""""""""""""""
 
 call dein#add('Shougo/unite.vim')
@@ -29,14 +28,6 @@ call dein#end()
 if dein#check_install()
 	call dein#install()
 endif
-
-"""""""""""""""""""
-" Color Scheme
-"""""""""""""""""""
-set background=dark
-colorscheme Antares
-colorscheme molokai
-colorscheme badwolf
 
 """""""""""""""""""
 " Basic Setting
@@ -69,6 +60,22 @@ set pastetoggle=<F10>
 nnoremap <F10> :set paste!<CR>:set paste?<CR>
 "pathをいい感じにしてくれるらしい
 execute pathogen#infect()
+
+"""""""""""""""""""
+" Color Scheme
+"""""""""""""""""""
+set background=dark
+"colorscheme molokai
+
+augroup TransparentBG
+  	autocmd!
+	autocmd Colorscheme * highlight Normal ctermbg=none
+	autocmd Colorscheme * highlight NonText ctermbg=none
+	autocmd Colorscheme * highlight LineNr ctermbg=none
+	autocmd Colorscheme * highlight Folded ctermbg=none
+augroup END
+
+colorscheme badwolf
 
 """"""""""""""""""""""""""""""
 " Keymap設定
@@ -184,6 +191,6 @@ nnoremap [go] <Nop>
 nmap     <Space>g [go]
 nnoremap [go]r :GoRun<CR>
 nnoremap [go]e :GoErrCheck<CR>
-
+nnoremap [go]d :GoDef<CR>
 
 
