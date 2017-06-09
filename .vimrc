@@ -64,9 +64,6 @@ execute pathogen#infect()
 """""""""""""""""""
 " Color Scheme
 """""""""""""""""""
-set background=dark
-"colorscheme molokai
-
 augroup TransparentBG
   	autocmd!
 	autocmd Colorscheme * highlight Normal ctermbg=none
@@ -75,6 +72,8 @@ augroup TransparentBG
 	autocmd Colorscheme * highlight Folded ctermbg=none
 augroup END
 
+set background=dark
+"colorscheme molokai
 colorscheme badwolf
 
 """"""""""""""""""""""""""""""
