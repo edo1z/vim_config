@@ -73,8 +73,9 @@ augroup TransparentBG
 augroup END
 
 set background=dark
-"colorscheme molokai
 colorscheme badwolf
+hi Comment ctermfg=247
+hi LineNr ctermfg=244
 
 """"""""""""""""""""""""""""""
 " Keymap設定
