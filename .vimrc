@@ -127,7 +127,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " lightlineの設定
 """"""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'landscape',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -189,7 +189,7 @@ let g:syntastic_go_checkers = ['go', 'golint']
 filetype plugin indent on
 nnoremap [go] <Nop>
 nmap     <Space>g [go]
-nnoremap [go]r :GoRun<CR>
+nnoremap [go]r :GoRun
 nnoremap [go]e :GoErrCheck<CR>
 nnoremap [go]d :GoDef<CR>
 
