@@ -74,6 +74,7 @@ augroup END
 
 set background=dark
 colorscheme badwolf
+"colorscheme molokai
 hi Comment ctermfg=247
 hi LineNr ctermfg=244
 
