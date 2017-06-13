@@ -87,8 +87,13 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
-nnoremap <Space>j $
+nnoremap <Space>h ^
+nnoremap <Space>l $
 cnoremap <Space>j $<CR>
+nnoremap <Space>w :w<CR>
+nnoremap <Space>q :q<CR>
+nnoremap <Esc><Esc> :nohlsearch<CR>
+inoremap jj <Esc>
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 nnoremap Q <Nop>
