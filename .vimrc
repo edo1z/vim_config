@@ -54,18 +54,18 @@ nnoremap <F10> :set paste!<CR>:set paste?<CR>
 " Color Scheme
 """""""""""""""""""
 " 背景透過
-augroup TransparentBG
-  	autocmd!
-	autocmd Colorscheme * highlight Normal ctermbg=none
-	autocmd Colorscheme * highlight NonText ctermbg=none
-	autocmd Colorscheme * highlight LineNr ctermbg=none
-	autocmd Colorscheme * highlight Folded ctermbg=none
-augroup END
+" augroup TransparentBG
+"   	autocmd!
+" 	autocmd Colorscheme * highlight Normal ctermbg=none
+" 	autocmd Colorscheme * highlight NonText ctermbg=none
+" 	autocmd Colorscheme * highlight LineNr ctermbg=none
+" 	autocmd Colorscheme * highlight Folded ctermbg=none
+" augroup END
 
 "set background=dark
-colorscheme gotham
-"colorscheme molokai
-"colorscheme badwolf
+" colorscheme gotham
+" colorscheme molokai
+colorscheme badwolf
 hi Comment ctermfg=247
 hi LineNr ctermfg=244
 
