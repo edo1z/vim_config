@@ -1,33 +1,24 @@
-if &compatible
-	set nocompatible
-endif
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+call plug#begin('~/.vim/plugged')
 
-call dein#begin(expand('~/.cache/dein'))
-
-"""""""""""""""""""
 " Color Scheme plugin
-"""""""""""""""""""
-call dein#add('tomasr/molokai')
-call dein#add('sjl/badwolf')
-"""""""""""""""""""
+Plug 'tomasr/molokai'
+Plug 'whatyouhide/vim-gotham'
+Plug 'sjl/badwolf'
 
-call dein#add('Shougo/unite.vim')
-call dein#add('scrooloose/nerdtree')
-call dein#add('tpope/vim-pathogen')
-call dein#add('tpope/vim-fugitive')
-call dein#add('tomtom/tcomment_vim')
-call dein#add('vim-scripts/AnsiEsc.vim')
-call dein#add('bronson/vim-trailing-whitespace')
-call dein#add('kana/vim-smartinput')
-call dein#add('itchyny/lightline.vim')
-call dein#add('kana/vim-submode')
-call dein#add('fatih/vim-go')
-call dein#end()
+" other plugin
+Plug 'Shougo/unite.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'kana/vim-smartinput'
+Plug 'itchyny/lightline.vim'
+Plug 'fatih/vim-go'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-pathogen'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'kana/vim-submode'
 
-if dein#check_install()
-	call dein#install()
-endif
+call plug#end()
 
 """""""""""""""""""
 " Basic Setting
@@ -37,9 +28,9 @@ set t_Co=256
 set title
 set number
 set ambiwidth=double
-set tabstop=4
+set tabstop=2
 set noexpandtab
-set shiftwidth=4
+set shiftwidth=2
 set softtabstop=0
 set smartindent
 set ttyfast
@@ -58,12 +49,11 @@ set hlsearch
 " F10でpasteモードのトグルになる
 set pastetoggle=<F10>
 nnoremap <F10> :set paste!<CR>:set paste?<CR>
-"pathをいい感じにしてくれるらしい
-execute pathogen#infect()
 
 """""""""""""""""""
 " Color Scheme
 """""""""""""""""""
+" 背景透過
 augroup TransparentBG
   	autocmd!
 	autocmd Colorscheme * highlight Normal ctermbg=none
@@ -72,9 +62,10 @@ augroup TransparentBG
 	autocmd Colorscheme * highlight Folded ctermbg=none
 augroup END
 
-set background=dark
-colorscheme badwolf
+"set background=dark
+colorscheme gotham
 "colorscheme molokai
+"colorscheme badwolf
 hi Comment ctermfg=247
 hi LineNr ctermfg=244
 
@@ -174,16 +165,6 @@ nnoremap sq :<C-u>q<CR>
 nnoremap sQ :<C-u>bd<CR>
 nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
 nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
-
-call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
-call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-call submode#map('bufmove', 'n', '', '<', '<C-w><')
-call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-
 
 """"""""""""""""""""""""""""""
 " Vim-goの設定
