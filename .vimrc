@@ -1,22 +1,42 @@
 call plug#begin('~/.vim/plugged')
 
-" Color Scheme plugin
-Plug 'tomasr/molokai'
-Plug 'whatyouhide/vim-gotham'
+" Color Scheme plugins
 Plug 'sjl/badwolf'
+Plug 'lucasprag/simpleblack'
+Plug 'jaredgorski/spacecamp'
+
+" NerdTree Plugins
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'PhilRunninger/nerdtree-buffer-ops'
+Plug 'PhilRunninger/nerdtree-visual-selection'
+
+" fzf Plugins
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
 
 " other plugin
-Plug 'Shougo/unite.vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'kana/vim-smartinput'
-Plug 'itchyny/lightline.vim'
-Plug 'fatih/vim-go'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-scripts/AnsiEsc.vim'
-Plug 'kana/vim-submode'
+Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
+Plug 'fatih/vim-go'
+Plug 'pangloss/vim-javascript'
+Plug 'majutsushi/tagbar'
+Plug 'itchyny/lightline.vim'
+"Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim'
+Plug 'junegunn/vim-easy-align'
+Plug 'jiangmiao/auto-pairs'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'mattn/emmet-vim'
+Plug 'simeji/winresizer'
 
 call plug#end()
 
@@ -28,16 +48,15 @@ set t_Co=256
 set title
 set number
 set ambiwidth=double
+set expandtab
 set tabstop=2
-set noexpandtab
 set shiftwidth=2
+set belloff=all
 set softtabstop=0
 set smartindent
 set ttyfast
 set noswapfile
 set laststatus=2
-" ウインドウのタイトルバーにファイルのパス情報等を表示する
-set title
 " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
 set wildmenu
 " 入力中のコマンドを表示する
@@ -49,25 +68,23 @@ set hlsearch
 " F10でpasteモードのトグルになる
 set pastetoggle=<F10>
 nnoremap <F10> :set paste!<CR>:set paste?<CR>
+" xで削除した時はヤンクしない
+vnoremap x "_x
+nnoremap x "_x
+" 改行時の自動コメントアウトの無効化
+set formatoptions-=ro
+autocmd FileType * setlocal formatoptions-=ro
+" yankのクリップボード連携
+set clipboard=unnamed
 
 """""""""""""""""""
 " Color Scheme
 """""""""""""""""""
-" 背景透過
-" augroup TransparentBG
-"   	autocmd!
-" 	autocmd Colorscheme * highlight Normal ctermbg=none
-" 	autocmd Colorscheme * highlight NonText ctermbg=none
-" 	autocmd Colorscheme * highlight LineNr ctermbg=none
-" 	autocmd Colorscheme * highlight Folded ctermbg=none
-" augroup END
-
-"set background=dark
-" colorscheme gotham
-" colorscheme molokai
 colorscheme badwolf
-hi Comment ctermfg=247
-hi LineNr ctermfg=244
+"colorscheme spacecamp
+"colorscheme simpleblack
+"hi Comment ctermfg=247
+"hi LineNr ctermfg=244
 
 """"""""""""""""""""""""""""""
 " Keymap設定
@@ -92,33 +109,24 @@ nnoremap Q <Nop>
 """"""""""""""""""""""""""""""
 " NERDTreeの設定
 """"""""""""""""""""""""""""""
-"NERDTreeの表示
-nnoremap <Space>n :NERDTree<CR>
+"NERDTreeの表示切替
+nnoremap <Space>n :NERDTreeToggle<CR>
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
+" 隠しファイル表示
+let NERDTreeShowHidden=1
+" 自動クローズ
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 """"""""""""""""""""""""""""""
-" Unit.vimの設定
+" fzfの設定
 """"""""""""""""""""""""""""""
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-" バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-" ファイル一覧
-noremap <C-N> :Unite -buffer-name=file file<CR>
-" 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
-" sourcesを「今開いているファイルのディレクトリ」とする
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" ウィンドウを分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" ウィンドウを縦に分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+nnoremap <Space>b :Buffers<CR>
+nnoremap <Space>f :GFiles<CR>
+nnoremap <Space>t :History<CR>
 
 """"""""""""""""""""""""""""""
 " lightlineの設定
@@ -140,6 +148,8 @@ set noshowmode
 " 画面分割・タブページの設定
 """"""""""""""""""""""""""""""
 nnoremap s <Nop>
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
@@ -148,8 +158,17 @@ nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 nnoremap sH <C-w>H
+
+" tab
 nnoremap sn gt
 nnoremap sp gT
+nnoremap st :<C-u>tabnew<CR>
+nnoremap sT :<C-u>Unite tab<CR>
+
+nnoremap th :<C-u>-tabm<CR>
+nnoremap tl :<C-u>+tabm<CR>
+nnoremap t0 :<C-u>0tabm<CR>
+
 nnoremap sr <C-w>r
 nnoremap s= <C-w>=
 nnoremap sw <C-w>w
@@ -157,14 +176,8 @@ nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
 nnoremap sN :<C-u>bn<CR>
 nnoremap sP :<C-u>bp<CR>
-nnoremap st :<C-u>tabnew<CR>
-nnoremap sT :<C-u>Unite tab<CR>
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 nnoremap sQ :<C-u>bd<CR>
-nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
 
 """"""""""""""""""""""""""""""
 " Vim-goの設定
